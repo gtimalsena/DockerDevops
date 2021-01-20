@@ -15,7 +15,7 @@ pipeline {
  
         stage('Create Tomcat 8.5 Docker Image'){
             steps {
-                sh "docker build . docker/simple_WebApp/ -t tomcatsamplewebapp:${env.BUILD_ID}"
+                sh "docker build . simple_WebApp/ -t tomcatsamplewebapp:${env.BUILD_ID}"
             }
         }
  
