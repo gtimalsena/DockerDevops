@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build Application') {
+            steps {
+                sh 'mvn -f pom.xml clean package'
+            }
+            post {
+                success {
+                    echo "war Artifacts created"
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+ 
+        Stage('Create Tomcat 8.0 Docker Image'){
+            steps {
+                sh "docker build . -t tomcatsamplewebapp:${env.BUILD_ID}"
+            }
+        }
+ 
+    }
+}
